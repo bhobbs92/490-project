@@ -14,7 +14,7 @@
 				res = JSON.parse(res);
 				console.log(res);
 				if (!res.success) {
-					toastr.info(res.message);
+					toastr.error(res.message);
 				}
 			}
 		});
