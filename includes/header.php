@@ -8,6 +8,9 @@
 
 			<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
 			<link rel="stylesheet" href="style.css">
+			<link rel="stylesheet" href="libs/toastr/toastr.min.css">
+			<script src="libs/jquery/dist/jquery.min.js"></script>
+			<script src="libs/toastr/toastr.min.js"></script>
 		</head>
 		<body>
 			<div id="wrapper">';
