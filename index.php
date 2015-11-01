@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Slow-2-Arrive</title>
-
-	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css">
-</head>
-<body>
-	<div id="wrapper">
-		<form id="loginForm" action="php/login.php">
+<?php
+	ini_set('display_errors', true);
+	require 'includes/header.php';
+?>
+		<form id="loginForm" action="inventory" method="POST">
 		  <h1>Sign In</h1>
 		  <div class="form-group">
 		    <label for="exampleInputEmail1">Username</label>
@@ -23,6 +16,5 @@
 		  
 		  <br><br> <a href="signup" rel="signup">Don&rsquo;t have an account? Sign up!</a>
 		</form>
-	</div>
-</body>
-</html>
+
+<?php require 'includes/footer.php'; ?>
