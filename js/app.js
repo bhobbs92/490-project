@@ -1,4 +1,9 @@
 (function () {
+	angular
+		.module('Slow2Arrive', ['ui.router']);
+}());
+
+/*(function () {
 	$('#loginForm button').on('click', function (event) {
 		event.preventDefault();
 
@@ -19,4 +24,4 @@
 			}
 		});
 	});
-}());
+}());*/

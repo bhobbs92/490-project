@@ -1,5 +1,4 @@
 <?php
-	ini_set('display_errors', true);
 	require 'includes/header.php';
 ?>
 		<form id="loginForm" action="inventory/login.php" method="POST">
