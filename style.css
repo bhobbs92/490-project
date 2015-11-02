@@ -14,6 +14,8 @@
 
 .cart-container {
 	background-color: white;
+	width: 50%;
+	margin: 20px auto;
 }
 
 .inStock {
@@ -33,10 +35,25 @@
 	color: #d9534f;
 }
 
+#cartItems {
+	display: block;
+	overflow: scroll;
+	height: 300px;
+}
+
+#cartItem {
+	width: 100%;
+	padding: 18px;
+}
+
 .table>tbody>tr>td, .table>tfoot>tr>td{
     vertical-align: middle;
 }
 @media screen and (max-width: 600px) {
+	.cart-container {
+		width: 100%;
+	}
+
     table#cart tbody td .form-control{
 		width:20%;
 		display: inline !important;

@@ -10,6 +10,7 @@
 
 		$scope.addToCart = addToCart;
 		$scope.getStock = getStock;
+		$scope.getTotalPrice = getTotalPrice;
 
 		$http.get('api/inventory.php')
 			.then(function (res) {
@@ -36,7 +37,20 @@
 			} else {
 				return 'almostGone';
 			}
+		}
 
+		function getTotalPrice () {
+			var cart = $scope.cart;
+			var totalPrice = 0;
+
+			for (var i = 0; i < cart.length; i++) {
+				var price = parseInt(cart[i].price);
+				totalPrice += price;
+
+				console.log(totalPrice);
+			}
+
+			return totalPrice;
 		}
 	}
 }());
