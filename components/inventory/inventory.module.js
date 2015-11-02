@@ -8,7 +8,11 @@
 	function inventoryCtrl ($scope, $http) {
 		$http.get('api/inventory.php')
 			.then(function (res) {
-				console.log(res);
+				var data = res.data;
+				console.log(data);
+				if (data.success) {
+					$scope.items = data.items;
+				}
 			});
 	}
 }());
