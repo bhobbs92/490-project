@@ -17,6 +17,12 @@
 				url: '/inventory',
 				templateUrl: 'components/inventory/inventory.html',
 				controller: 'inventoryCtrl'
+			})
+
+			.state('invoice', {
+				url: '/invoice',
+				templateUrl: 'components/invoice/invoice.html',
+				controller: 'invoiceCtrl'
 			});
 
 		$urlRouterProvider.otherwise('/');

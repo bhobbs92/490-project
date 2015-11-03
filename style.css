@@ -7,6 +7,10 @@
 	margin-left: 10px;
 }
 
+.btn.cart {
+	margin-right: 7px;
+}
+
 #addToCart {
 	padding: 0 10px;
 	float: right;
