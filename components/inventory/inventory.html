@@ -16,7 +16,11 @@
     <tbody>
       <tr ng-repeat="item in items track by $index">
         <td>{{ item.itemId }}</td>
-        <td>{{ item.name }}</td>
+        <td>{{ item.name }}
+			<span ng-show="item.name === 'cat-in-the-hat (brail)'">
+				<img src="components/inventory/cat.png" style="height:25px;">
+			</span>
+		</td>
         <td>${{ item.price }}</td>
         <td>
           <span class="inStock {{ getStock($index) }}">
