@@ -26,8 +26,10 @@
 		function addToCart (itemIndex) {
 			var currentItem = $scope.items[itemIndex];
 			
-			$scope.cart.push(currentItem);
-			currentItem.stock--;
+			if (currentItem.stock > 0) {
+				currentItem.stock--;
+				$scope.cart.push(currentItem);
+			}
 		}
 
 		function getStock (itemIndex) {

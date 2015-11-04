@@ -25,10 +25,13 @@
         <td>${{ item.price }}</td>
         <td>
           <span class="inStock {{ getStock($index) }}">
-            <span ng-show="getStock($index) === 'almostGone'">
-              Only
-            </span> 
+            <span ng-show="item.stock > 0">
+              <span ng-show="getStock($index) === 'almostGone'">
+                Only
+              </span> 
               {{ item.stock }} left
+            </span>
+            <span class="text-danger" ng-show="item.stock <= 0">Sold out</span>
           </span>
           <button id="addToCart" class="btn btn-info" ng-click="addToCart($index)">+</button>
         </td>
