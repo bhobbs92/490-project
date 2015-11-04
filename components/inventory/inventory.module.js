@@ -3,14 +3,16 @@
 		.module('inventory', [])
 		.controller('inventoryCtrl', inventoryCtrl);
 
-	inventoryCtrl.$inject = ['$scope', '$http'];
+	inventoryCtrl.$inject = ['$scope', '$http', '$window', '$state'];
 
-	function inventoryCtrl ($scope, $http) {
+	function inventoryCtrl ($scope, $http, $window, $state) {
 		$scope.cart = [];
 
 		$scope.addToCart = addToCart;
 		$scope.getStock = getStock;
 		$scope.getTotalPrice = getTotalPrice;
+		$scope.removeItemFromCart = removeItemFromCart;
+		$scope.logout = logout;
 
 		$http.get('api/inventory.php')
 			.then(function (res) {
@@ -23,8 +25,8 @@
 
 		function addToCart (itemIndex) {
 			var currentItem = $scope.items[itemIndex];
+			
 			$scope.cart.push(currentItem);
-			console.log($scope.cart);
 			currentItem.stock--;
 		}
 
@@ -46,11 +48,36 @@
 			for (var i = 0; i < cart.length; i++) {
 				var price = parseInt(cart[i].price);
 				totalPrice += price;
-
-				console.log(totalPrice);
 			}
 
 			return totalPrice;
+		}
+
+		function removeItemFromCart (itemToDelete, itemIndex) {
+			console.log('gonna loop');
+
+			for (var i = 0; i < $scope.items.length; i++) {
+				var item = $scope.items[i];
+
+				if (item.itemId === itemToDelete.itemId) {
+					console.log(item);
+					item.stock++;
+				}
+			}
+
+			$scope.cart.splice(itemIndex, 1);
+			console.log('done');
+		}
+
+		function logout () {
+			$window.localStorage.removeItem('token');
+			$state.go('login');
+		}
+
+		function loopThruItems (items, action) {
+			for (var i = 0; i < items.length; i++) {
+				action(items[i]);
+			}
 		}
 	}
 }());

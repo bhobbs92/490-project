@@ -1,3 +1,4 @@
+<a class="pull-right logout" ng-click="logout()"><span>Log out</span></a>
 <h1 id="inventoryTitle">Inventory</h1>
 
 <button type="button" class="btn btn-success pull-right cart" data-toggle="modal" data-target="#cartModal">
@@ -49,7 +50,9 @@
           </td>
           <td data-th="Price">${{ c.price }}</td>
           <td class="actions" data-th="">
-            <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>                
+            <button class="btn btn-danger btn-sm" ng-click="removeItemFromCart(c, $index)">
+              <i class="fa fa-trash-o"></i>
+            </button>                
           </td>
         </tr>
       </tbody>

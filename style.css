@@ -7,8 +7,9 @@
 	margin-left: 10px;
 }
 
-.btn.cart {
-	margin-right: 7px;
+.btn.cart, .pull-right.logout {
+	margin-right: 14px;
+	cursor: pointer;
 }
 
 #addToCart {
