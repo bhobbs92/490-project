@@ -54,19 +54,15 @@
 		}
 
 		function removeItemFromCart (itemToDelete, itemIndex) {
-			console.log('gonna loop');
-
 			for (var i = 0; i < $scope.items.length; i++) {
 				var item = $scope.items[i];
 
 				if (item.itemId === itemToDelete.itemId) {
-					console.log(item);
 					item.stock++;
 				}
 			}
 
 			$scope.cart.splice(itemIndex, 1);
-			console.log('done');
 		}
 
 		function logout () {
