@@ -12,17 +12,17 @@ $query = $dbc->prepare("SELECT max(invoiceId) FROM Invoice");
 		if ($query->execute()) {
 			$lastPK = $query->fetch();
 			$nextPK = $lastPK[0] + 1;
-			
+
 			$query2 = $dbc->prepare("INSERT INTO Invoice VALUES (:invoiceId,22,:customerId)");
 			$query2->bindParam(":invoiceId", $nextPK);
 			$query2->bindParam(":customerId", $customerId);
-			if($query2->execute()){ 
+			if($query2->execute()){
 				//to insert into the invoice table
 			} else{
-				
+
 			}
-			
-			
+
+
 			$arr = array('success' => true, 'items' => $lastPK);
 			echo json_encode($arr);
 		} else {
