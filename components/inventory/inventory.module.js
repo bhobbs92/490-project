@@ -80,8 +80,10 @@
 		}
 
 		function goToInvoice () {
-			$http.post('api/invoice')
+			$http.post('api/invoice.php', $scope.cart)
 				.then(function (res) {
+					var data = res.data;
+					console.log(data);
 					console.log(res);
 				});
 		}
