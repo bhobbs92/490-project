@@ -12,6 +12,7 @@
 
 		function logout () {
 			$window.localStorage.removeItem('token');
+			$window.localStorage.removeItem('cart');
 			$state.go('login');
 		}
 	}

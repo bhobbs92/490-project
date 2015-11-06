@@ -64,7 +64,11 @@
           <td><a class="btn btn-warning" data-dismiss="modal"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
           <td colspan="2" class="hidden-xs"></td>
           <td class="hidden-xs text-center"><strong>Total: ${{ getTotalPrice() }}</strong></td>
-          <td><a ui-sref="invoice" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+          <td>
+            <a ng-click="goToInvoice()" class="btn btn-success btn-block">Checkout
+              <i class="fa fa-angle-right"></i>
+            </a>
+          </td>
         </tr>
       </tfoot>
     </table>

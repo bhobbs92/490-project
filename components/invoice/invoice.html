@@ -1,1 +1,26 @@
 <a class="pull-right logout" ng-click="logout()"><span>Log out</span></a>
+<h1 id="inventoryTitle">Invoice</h1>
+
+<div class="no-items jumbotron" ng-if="!cart">
+	<h3>Whoops!</h3>
+	<h4>Your cart has no items</h4>
+	<a ui-sref="inventory">Please try shopping again</a>
+</div>
+
+<table class="table table-striped" ng-if="cart">
+    <thead>
+      <tr>
+        <th>ID #</th>
+        <th>Item</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="c in cart track by $index">
+        <td>{{ c.itemId }}</td>
+        <td>{{ c.name }}
+		</td>
+        <td>${{ c.price }}</td>
+      </tr>
+    </tbody>
+</table>

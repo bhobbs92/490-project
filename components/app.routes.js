@@ -20,7 +20,7 @@
 			})
 
 			.state('invoice', {
-				url: '/invoice',
+				url: '/invoice/:cart',
 				templateUrl: 'components/invoice/invoice.html',
 				controller: 'invoiceCtrl'
 			});

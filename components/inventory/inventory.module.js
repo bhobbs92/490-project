@@ -13,6 +13,7 @@
 		$scope.getTotalPrice = getTotalPrice;
 		$scope.removeItemFromCart = removeItemFromCart;
 		$scope.logout = logout;
+		$scope.goToInvoice = goToInvoice;
 
 		$http.get('api/inventory.php')
 			.then(function (res) {
@@ -76,6 +77,13 @@
 			for (var i = 0; i < items.length; i++) {
 				action(items[i]);
 			}
+		}
+
+		function goToInvoice () {
+			$http.post('api/invoice')
+				.then(function (res) {
+					console.log(res);
+				});
 		}
 	}
 }());

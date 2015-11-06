@@ -40,6 +40,14 @@
 	color: #d9534f;
 }
 
+div.no-items.jumbotron {
+	padding: 30px;
+}
+
+div.no-items.jumbotron a {
+	margin-top: 15px;
+}
+
 #cartItems {
 	display: block;
 	overflow: scroll;
