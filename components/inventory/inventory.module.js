@@ -26,7 +26,7 @@
 
 		function addToCart (itemIndex) {
 			var currentItem = $scope.items[itemIndex];
-			
+
 			if (currentItem.stock > 0) {
 				currentItem.stock--;
 				$scope.cart.push(currentItem);
@@ -80,7 +80,7 @@
 		}
 
 		function goToInvoice () {
-			$http.post('api/invoice')
+			$http.post('api/invoice.php')
 				.then(function (res) {
 					console.log(res);
 				});
