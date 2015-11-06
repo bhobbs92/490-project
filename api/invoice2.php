@@ -5,7 +5,6 @@
 	$request = json_decode($postData);
 	$jwt = getallheaders()['Authorization'];
 
-
 	try {
 		require 'database.php';
 

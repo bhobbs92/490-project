@@ -70,7 +70,12 @@
 		}
 
 		function removeItemFromCart (itemToDelete, itemIndex) {
-			$scope.purchased[itemToDelete.name].amount--;
+			if ($scope.purchased[itemToDelete.name].amount === 1) {
+				delete $scope.purchased[itemToDelete.name];
+			} else {
+				$scope.purchased[itemToDelete.name].amount --;
+			}
+
 			console.log($scope.purchased[itemToDelete.name]);
 
 			for (var i = 0; i < $scope.items.length; i++) {
@@ -96,12 +101,19 @@
 		}
 
 		function goToInvoice () {
+			if (!$scope.cart.length) {
+				toastr.error('Your cart has no items!');
+			} else {
+				$http.post('api/invoice2.php', $scope.purchased)
+					.then(function (res) {
+						var data = res.data;
+						console.log(res);
 
-			$http.post('api/invoice2.php', $scope.purchased)
-				.then(function (res) {
-					var data = res.data;
-					console.log(data);
-				});
+						if (data.success) {
+							$state.go('invoice', { items: true });
+						}
+					});
+			}
 		}
 	}
 }());
