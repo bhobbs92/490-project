@@ -13,7 +13,7 @@
 					var data = res.data;
 
 					if (data.success) {
-						$state.go('inventory');
+						$state.go('dashboard');
 					} else {
 						toastr.info('Your session has expired, please log in again');
 					}
@@ -33,7 +33,7 @@
 						toastr.error(data.message);
 					} else {
 						$window.localStorage.token = data.token;
-						$state.go('inventory');
+						$state.go('dashboard');
 					}
 				});
 		}
