@@ -3,28 +3,34 @@
 		.module('httpInterceptorModule', [])
 		.factory('interceptHttp', interceptHttp);
 
-	interceptHttp.$inject = ['$window', '$location'];
+	interceptHttp.$inject = ['$window', '$location', 'authFactory'];
 
-	function interceptHttp ($window, $location) {
+	function interceptHttp ($window, $location, authFactory) {
 		var interceptFactory = {
 			request: request,
-			responseError: responseError
+			response: response
 		};
 
 		function request (config) {
 			var token = $window.localStorage.getItem('token');
 
-			if (token)
+			if (token) {
 				config.headers['Authorization'] = token;
+			}
 
 			return config;
 		}
 
-		function responseError (res) {
-			if (res.status == 401 || res.status == 403) {
+		function response (res) {
+			console.warn(res);
+			var data = res.data;
+			
+			if (!data.success) {
 				authFactory.removeToken();
-				$location.path('/login');
+				$location.path('/');
 			}
+			
+			return res;
 		}
 
 		return interceptFactory;

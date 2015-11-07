@@ -1,22 +1,17 @@
 (function () {
 	angular
-		.module('login', [])
+		.module('login', ['auth'])
 		.controller('loginCtrl', loginCtrl);
 
-	loginCtrl.$inject = ['$scope', '$http', '$window', '$state'];
+	loginCtrl.$inject = ['$scope', '$http', '$state', 'authFactory'];
 
-	function loginCtrl ($scope, $http, $window, $state) {
-		if ($window.localStorage.token) {
-			$http.post('api/inventory.php', $window.localStorage.token)
+	function loginCtrl ($scope, $http, $state, authFactory) {
+		var token = authFactory.getToken();
+
+		if (token) {
+			$http.post('api/inventory.php', token)
 				.then(function (res) {
 					console.log(res);
-					var data = res.data;
-
-					if (data.success) {
-						$state.go('dashboard');
-					} else {
-						toastr.info('Your session has expired, please log in again');
-					}
 				});
 		}
 
@@ -26,7 +21,6 @@
 		function login () {
 			$http.post('api/login.php', $scope.formData)
 				.then(function (res) {
-					console.log(res);
 					var data = res.data;
 
 					if (!data.success) {

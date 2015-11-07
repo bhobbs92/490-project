@@ -27,8 +27,7 @@ li:last-child {
 li a {
   text-decoration: none;
   color: #ccc;
-  font: 25px/1 Helvetica, Verdana, sans-serif;
-  text-transform: uppercase;
+  font: 20px Helvetica, Verdana, sans-serif;
  
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
