@@ -1,0 +1,23 @@
+<form id="loginForm" method="POST">
+  <h1>Sign Up</h1>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Username</label>
+    <input type="text" class="form-control" ng-model="formData.customerId" placeholder="Username">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" ng-model="formData.password" placeholder="Password">
+  </div>
+   <div class="form-group">
+    <label>Full name</label>
+    <input type="text" class="form-control" ng-model="formData.fullName" placeholder="Full Name">
+  </div>
+   <div class="form-group">
+    <label>Address</label>
+    <input type="text" class="form-control" ng-model="formData.address" placeholder="Address">
+  </div>
+  <button type="submit" class="btn btn-info" ng-click="signup()">Submit</button>
+  
+  <br><br> 
+  <a ui-sref="login" rel="signup">Already have an account? Sign in!</a>
+</form>

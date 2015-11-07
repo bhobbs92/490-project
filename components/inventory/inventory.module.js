@@ -104,6 +104,12 @@
 			if (!$scope.cart.length) {
 				toastr.error('Your cart has no items!');
 			} else {
+
+				$http.post('api/invoice.php', $scope.purchased).then(function(response){
+					var data = response.data;
+					console.log('response from invoice insertion: ');
+					console.log(data);
+				});
 				$http.post('api/invoice2.php', $scope.purchased)
 					.then(function (res) {
 						var data = res.data;

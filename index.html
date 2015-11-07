@@ -3,7 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<base href="/490-project/">
+
+<!-- 	<base href="/~ybb4/it490/slow2Arrive/">
+ -->	<base href="/490-project/">
 
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
@@ -14,6 +16,14 @@
 </head>
 <body>
 	<div class="wrapper">
+		<nav>
+		  <ul>
+		    <li><a ui-sref="dashboard">Home</a></li>
+		    <li><a ui-sref="profile">Profile</a></li>
+		    <li><a ui-sref="inventory">Inventory</a></li>
+		    <li><a href="#">Contact</a></li>
+		  </ul>
+		</nav>
 		<ui-view></ui-view>
 	</div>
 
@@ -30,5 +40,8 @@
 	<script src="components/login/login.module.js"></script>
 	<script src="components/inventory/inventory.module.js"></script>
 	<script src="components/invoice/invoice.module.js"></script>
+	<script src="components/signup/signup.module.js"></script>
+	<script src="components/dashboard/dashboard.module.js"></script>
+	<script src="components/profile/profile.module.js"></script>
 </body>
 </html>
