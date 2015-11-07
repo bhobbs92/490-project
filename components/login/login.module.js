@@ -22,11 +22,8 @@
 			$http.post('api/login.php', $scope.formData)
 				.then(function (res) {
 					var data = res.data;
-
-					if (!data.success) {
-						toastr.error(data.message);
-					} else {
-						$window.localStorage.token = data.token;
+					if (data.success) {
+						authFactory.setToken(data.token);
 						$state.go('dashboard');
 					}
 				});

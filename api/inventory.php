@@ -1,7 +1,4 @@
 <?php
-	/*require 'jwt.php';
-	$jwt = getallheaders()['Authorization'];*/
-
 	require 'auth.php';
 	
 	require 'database.php';

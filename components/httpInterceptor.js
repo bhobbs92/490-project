@@ -24,8 +24,9 @@
 		function response (res) {
 			console.warn(res);
 			var data = res.data;
-			
-			if (!data.success) {
+
+			if (data.success === false) {
+				toastr.error(data.message);
 				authFactory.removeToken();
 				$location.path('/');
 			}
