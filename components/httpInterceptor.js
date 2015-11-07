@@ -21,14 +21,17 @@
 			return config;
 		}
 
-		function response (res) {
+		function response (res) {			
 			console.warn(res);
-			var data = res.data;
 
-			if (data.success === false) {
-				toastr.error(data.message);
-				authFactory.removeToken();
-				$location.path('/');
+			if (typeof res.data === 'object') {
+				var data = res.data;
+
+				if (data.success === false) {
+					toastr.error(data.message);
+					authFactory.removeToken();
+					$location.path('/');
+				}
 			}
 
 			return res;
