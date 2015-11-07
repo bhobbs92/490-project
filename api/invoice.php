@@ -8,7 +8,7 @@ $postData = file_get_contents("php://input");
 $request = json_decode($postData);
 $jwt = getallheaders()['Authorization'];
 
-$payload = JWT::decode($jwt);
+$payload = JWT::decode($jwt, 'secret_server_key', array('HS256'));
 $customerId = $payload->customerId;
 
 $dbc = new PDO($db, $dbUsername, $dbPassword);
