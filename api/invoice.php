@@ -20,6 +20,8 @@ $query = $dbc->prepare("SELECT max(invoiceId) FROM Invoice");
 			$lastPK = $query->fetch();	//get the previous PK
 			$nextPK = $lastPK[0] + 1;		//increment by 1 for new insert
 
+			
+
 				//prepare query for insert into INVOICE table
 			$query2 = $dbc->prepare("INSERT INTO Invoice VALUES (:invoiceId,22,:customerId)");
 			$query2->bindParam(":invoiceId", $nextPK);

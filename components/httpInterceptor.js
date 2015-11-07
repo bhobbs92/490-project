@@ -30,7 +30,7 @@
 				authFactory.removeToken();
 				$location.path('/');
 			}
-			
+
 			return res;
 		}
 
