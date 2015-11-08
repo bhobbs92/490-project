@@ -110,6 +110,9 @@
 					console.log('response from invoice insertion: ');
 					console.log(data);
 				});
+
+
+				$scope.purchased.total = getTotalPrice();
 				$http.post('api/inventoryUpdate.php', $scope.purchased)
 					.then(function (res) {
 						var data = res.data;

@@ -7,10 +7,10 @@
 
 	function profileCtrl ($scope, $http) {
 		$http.get('api/invoiceRequest.php')
-			.then(function (response) {
-				$scope.invoices = response.data.items;
-				$scope.invoices = response.data.customerData;
-				console.log(response);
+			.then(function (res) {
+				$scope.user = res.data.customerData[0];
+				$scope.invoices = res.data.items;
+				$scope.invoices = res.data.customerData;
 			});
 
 	}

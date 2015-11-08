@@ -27,9 +27,13 @@ $query = $dbc->prepare("SELECT max(invoiceId) FROM Invoice");
 			$query2->bindParam(":customerId", $customerId);
 			if($query2->execute()){
 
-						//prepare query for insert into INVOICE_ELEMENTS table
+						//for each product customer purchased
 					foreach ($request as $item => $prop) {
-						$query3 = $dbc->prepare("INSERT INTO Invoice_Elements VALUES (NULL,:invoiceId,:itemId,:quantityAmt)");
+					//	if($item != 'total'){
+
+
+												//prepare query for insert into INVOICE_ELEMENTS table
+						$query3 = $dbc->prepare("INSERT INTO Invoice_Elements VALUES (NULL,:invoiceId,22,:quantityAmt)");
 
 						$query3->bindParam(":invoiceId", $nextPK);
 						$query3->bindParam(":itemId", $prop->itemId);
@@ -37,6 +41,7 @@ $query = $dbc->prepare("SELECT max(invoiceId) FROM Invoice");
 
 							//execute INVOICE_ELEMENTS insertion
 						$query3->execute();
+				//	}
 					}
 
 			} else{

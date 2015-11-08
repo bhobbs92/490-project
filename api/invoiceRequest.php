@@ -16,7 +16,7 @@ $query1 = $dbc->prepare("SELECT * FROM Customer WHERE customerId = :customerId")
 $query1->bindParam(":customerId", $customerId );
 
 if ($query1->execute()) {
-  $CustomerData = $query1->fetchAll();
+  $customerData = $query1->fetchAll();
 }
 
 
@@ -27,25 +27,41 @@ $query2->bindParam(":customerId", $customerId );
 if ($query2->execute()) {
 
   $invoices = $query2->fetchAll();
+  $counter = 0;
+  $invoiceData = array();
 
-  foreach($invoices as $key => $value){
-    $counter = 0;
-      $query3 = $dbc->prepare("SELECT * FROM Invoice_Elements WHERE invoiceId='1000956'");
-      //$query3->bindParam(":invoiceId", $value->invoiceId);
-      if($query3->execute()){
-        $invoiceElements = $query3->fetchAll();
-        $invoiceData= array('invoice'=> $invoices, 'invoiceData' => $invoiceElements);
-      //$invoiceData= array('invoice'=> $invoices[$counter], 'data' => array('invoiceData' => $invoiceElements));
-    //  $invoiceData[$value->invoiceId] = array('invoiceData' => $invoiceElements);
-      }
-      $counter = $counter +1;
- }
+  foreach ($invoices as $key => $value) {
 
-  $arr = array('success' => true,'customerData' =>$CustomerData, 'items' => $invoiceData);
-  echo json_encode($arr);
+    $currentInvoiceId = $invoices[$counter]["invoiceId"];
 
+    $query3 = $dbc->prepare("SELECT * FROM Invoice_Elements WHERE invoiceId=:invoiceId");
+    $query3->bindParam(":invoiceId", $currentInvoiceId);
+
+    if ($query3->execute()) {
+      $invoiceElements = $query3->fetchAll();
+
+      $tempArray = array(
+        'invoiceId' => $invoices[$counter]['invoiceId'],
+        'customerId' => $invoices[$counter]['customerId'],
+        'amountBillable' => $invoices[$counter]['amountBillable'],
+        'invoiceElement' => $invoiceElements
+      );
+
+      $invoiceData[] = $tempArray;
+
+    } else {
+      echo 'Houston, we got a DB problem';
+    }
+
+    $counter++;
+  }
+
+  $res = array(
+    'success' => true,
+    'customerData' => $customerData,
+    'invoices' => $invoiceData
+  );
+
+  echo json_encode($res);
 }
-
-
-//echo "$"
 ?>
