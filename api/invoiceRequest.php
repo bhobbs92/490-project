@@ -34,8 +34,8 @@ if ($query2->execute()) {
       //$query3->bindParam(":invoiceId", $value->invoiceId);
       if($query3->execute()){
         $invoiceElements = $query3->fetchAll();
-      // $invoiceData= array('invoice'=> $invoices, 'invoiceData' => $invoiceElements);
-      $invoiceData= array('invoice'=> $invoices[$counter], 'data' => array('invoiceData' => $invoiceElements));
+        $invoiceData= array('invoice'=> $invoices, 'invoiceData' => $invoiceElements);
+      //$invoiceData= array('invoice'=> $invoices[$counter], 'data' => array('invoiceData' => $invoiceElements));
     //  $invoiceData[$value->invoiceId] = array('invoiceData' => $invoiceElements);
       }
       $counter = $counter +1;
@@ -48,10 +48,4 @@ if ($query2->execute()) {
 
 
 //echo "$"
-
-
-
-
-
-
 ?>
