@@ -1,3 +1,4 @@
+<a class="pull-right logout btn btn-info" ng-click="logout()"><span>Log out</span></a>
 <h1 id="profileh1">Profile Page</h1>
 <div class="container">
 	<div class="row">
@@ -14,40 +15,25 @@
 	            </div>
 	            <div class="desc">{{ user.address }}</div>
 
-							<div class="invoices">
-
-								<ul class="list-unstyled">
-									<li ng-repeat="invoice in invoices">
-										<a>{{invoice.invoiceId}}</a>
-									<li>
-								</ul>
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th>Invoice ID</th>
-											<th>Item ID</th>
-											<th>Item Name</th>
-											<th>Quantity</th>
-											<th>Price</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th>81981</th>
-											<th>4524345</th>
-											<th>catheder</th>
-											<th>8</th>
-											<th>5.99</th>
-										</tr>
-										<tr>
-											<th>5783</th>
-											<th>91816</th>
-											<th>Used cat</th>
-											<th>8</th>
-											<th>12.99</th>
-										</tr>
-									<tbody>
-								</table>
+			<div class="invoices">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Invoice ID</th>
+							<th>Item ID</th>
+							<th>Quantity</th>
+							<th>Total price</th>
+						</tr>
+					</thead>
+					<tbody ng-repeat="i in invoices track by $index">
+						<tr>
+							<th>{{ i.invoiceId }}</th>
+							<th>{{ i.invoiceElement[0].itemId }}</th>
+							<th>{{ i.invoiceElement[0].quantityAmt }}</th>
+							<th>${{ i.amountBillable }}</th>
+						</tr>
+					<tbody>
+				</table>
 	        </div>
 	    </div>
 	</div>

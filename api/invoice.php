@@ -1,6 +1,5 @@
 <?php
 
-//$customerId = 'drg23';
 require 'database.php';
 require 'jwt.php';
 
@@ -22,10 +21,10 @@ $query = $dbc->prepare("SELECT max(invoiceId) FROM Invoice");
 
 
 				//prepare query for insert into INVOICE table
-			$query2 = $dbc->prepare("INSERT INTO Invoice VALUES (:invoiceId,22,:customerId)");
+			$query2 = $dbc->prepare("INSERT INTO Invoice VALUES (:invoiceId, 22, :customerId)");
 			$query2->bindParam(":invoiceId", $nextPK);
 			$query2->bindParam(":customerId", $customerId);
-			if($query2->execute()){
+			if ($query2->execute()) {
 
 						//for each product customer purchased
 					foreach ($request as $item => $prop) {
@@ -44,7 +43,7 @@ $query = $dbc->prepare("SELECT max(invoiceId) FROM Invoice");
 				//	}
 					}
 
-			} else{
+			} else {
 				//could not insert into INVOICE table
 			}
 
