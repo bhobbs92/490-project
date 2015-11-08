@@ -1,11 +1,11 @@
 (function () {
 	angular
-		.module('inventory', [])
+		.module('inventory', ['auth'])
 		.controller('inventoryCtrl', inventoryCtrl);
 
-	inventoryCtrl.$inject = ['$scope', '$http', '$window', '$state'];
+	inventoryCtrl.$inject = ['$scope', '$http', '$state', 'authFactory'];
 
-	function inventoryCtrl ($scope, $http, $window, $state) {
+	function inventoryCtrl ($scope, $http, $state, authFactory) {
 		$scope.cart = [];
 		$scope.purchased = {};
 
@@ -90,7 +90,7 @@
 		}
 
 		function logout () {
-			$window.localStorage.removeItem('token');
+			authFactory.removeToken();
 			$state.go('login');
 		}
 

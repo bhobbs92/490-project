@@ -1,11 +1,11 @@
 (function (){
 	angular
-		.module('invoice', [])
+		.module('invoice', ['auth'])
 		.controller('invoiceCtrl', invoiceCtrl);
 
-	invoiceCtrl.$inject = ['$scope', '$http', '$window', '$state', '$stateParams'];
+	invoiceCtrl.$inject = ['$scope', '$http', '$state', '$stateParams', 'authFactory'];
 
-	function invoiceCtrl ($scope, $http, $window, $state, $stateParams) {
+	function invoiceCtrl ($scope, $http, $state, $stateParams, authFactory) {
 		$('.modal-backdrop.fade.in').css('display', 'none');
 
 		if ($stateParams.items === 'true') {
@@ -15,8 +15,7 @@
 		$scope.logout = logout;
 
 		function logout () {
-			$window.localStorage.removeItem('token');
-			$window.localStorage.removeItem('cart');
+			authFactory.removeToken();
 			$state.go('login');
 		}
 	}

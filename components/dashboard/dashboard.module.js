@@ -1,11 +1,25 @@
 (function () {
 	angular
-		.module('dashboard', [])
+		.module('dashboard', ['auth'])
 		.controller('dashCtrl', dashCtrl);
 
-	dashCtrl.$inject = ['$scope', '$http'];
+	dashCtrl.$inject = ['$scope', '$http', '$state', 'authFactory'];
 
-	function dashCtrl ($scope, $http) {
-		console.log('dashboard');
+	function dashCtrl ($scope, $http, $state, authFactory) {
+		var token = authFactory.getToken();
+
+		if (!token) {
+			$state.go('login');
+			toastr.error('Please log in');
+			return false;
+		}
+
+		$scope.logout = logout;
+		
+
+		function logout () {
+			authFactory.removeToken();
+			$state.go('login');
+		}
 	}
 }());
