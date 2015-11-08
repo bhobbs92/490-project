@@ -14,6 +14,41 @@
 	                Yazeed Bzadough
 	            </div>
 	            <div class="desc">123 Main Street</div>
+
+							<div class="invoices">
+
+								<ul class="list-unstyled">
+									<li ng-repeat="invoice in invoices">
+										<a>{{invoice.invoiceId}}</a>
+									<li>
+								</ul>
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Invoice ID</th>
+											<th>Item ID</th>
+											<th>Item Name</th>
+											<th>Quantity</th>
+											<th>Price</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th>81981</th>
+											<th>4524345</th>
+											<th>catheder</th>
+											<th>8</th>
+											<th>5.99</th>
+										</tr>
+										<tr>
+											<th>5783</th>
+											<th>91816</th>
+											<th>Used cat</th>
+											<th>8</th>
+											<th>12.99</th>
+										</tr>
+									<tbody>
+								</table>
 	        </div>
 	    </div>
 	</div>

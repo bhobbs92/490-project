@@ -110,7 +110,7 @@
 					console.log('response from invoice insertion: ');
 					console.log(data);
 				});
-				$http.post('api/invoice2.php', $scope.purchased)
+				$http.post('api/inventoryUpdate.php', $scope.purchased)
 					.then(function (res) {
 						var data = res.data;
 						console.log(res);
