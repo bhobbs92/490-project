@@ -2,18 +2,17 @@
 <div class="container">
 	<div class="row">
 	    <div class="card hovercard">
-	    	<!-- .card .card-heading.image img -->
 	        <div class="info">
 	        	<div class="user-role">
-	        		ybzadough14
+	        		{{ user.customerId }}
 	        	</div>
 	        	<div class="card-heading image">
 		    		<img src="https://community.teamdynamix.com/Images/GenericUser.png" alt="profile picture">
 		    	</div>
 	            <div class="title">
-	                Yazeed Bzadough
+	                {{ user.name }}
 	            </div>
-	            <div class="desc">123 Main Street</div>
+	            <div class="desc">{{ user.address }}</div>
 
 							<div class="invoices">
 
