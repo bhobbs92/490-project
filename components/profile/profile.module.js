@@ -9,8 +9,8 @@
 		$http.get('api/invoiceRequest.php')
 			.then(function (res) {
 				$scope.user = res.data.customerData[0];
-				$scope.invoices = res.data.items;
-				$scope.invoices = res.data.customerData;
+				$scope.invoices = res.data.invoices;
+				console.log($scope.invoices);
 			});
 
 	}
