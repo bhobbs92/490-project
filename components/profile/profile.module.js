@@ -15,6 +15,11 @@
 		}
 
 		$scope.logout = logout;
+		$scope.showRow = false;
+		
+		$scope.displayRow = function(invoiceId){
+			$scope.showRow = invoiceId;
+		}
 
 		$http.get('api/invoiceRequest.php')
 			.then(function (res) {

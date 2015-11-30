@@ -40,14 +40,36 @@ if ($query2->execute()) {
     if ($query3->execute()) {
       $invoiceElements = $query3->fetchAll();
 
-      $tempArray = array(
+      $invoiceCounter = 0;
+      foreach($invoiceElements as $key => $value){
+        $currentItemId = $invoiceElements[$invoiceCounter]["itemId"];
+
+        $query4 = $dbc->prepare("SELECT name, price FROM Inventory WHERE itemId = :currentItemId");
+        $query4->bindParam(":currentItemId", $currentItemId);
+        if ($query4->execute()) {
+          $ItemElements = $query4->fetchAll();
+        }
+
+        $tempItemArray[$invoiceCounter] = array(
+          'invoiceId' => $invoiceElements[$invoiceCounter]["invoiceId"],
+          'invoiceELementId' => $invoiceElements[$invoiceCounter]["invoiceELementId"],
+          'itemId'=> $invoiceElements[$invoiceCounter]["itemId"],
+          'name' => $ItemElements[0][0],
+          'price' => $ItemElements[0][1],
+          'quantityAmt' => $invoiceElements[$invoiceCounter]["quantityAmt"],
+        );
+
+        $invoiceCounter++;
+      }
+
+      $tempInvoiceArray = array(
         'invoiceId' => $invoices[$counter]['invoiceId'],
         'customerId' => $invoices[$counter]['customerId'],
         'amountBillable' => $invoices[$counter]['amountBillable'],
-        'invoiceElement' => $invoiceElements
+        'invoiceElement' => $tempItemArray
       );
 
-      $invoiceData[] = $tempArray;
+      $invoiceData[] = $tempInvoiceArray;
 
     } else {
       echo 'Houston, we got a DB problem';

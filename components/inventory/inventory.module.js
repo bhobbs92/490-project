@@ -112,7 +112,7 @@
 				});
 
 
-				$scope.purchased.total = getTotalPrice();
+			//	$scope.purchased.total = getTotalPrice();
 				$http.post('api/inventoryUpdate.php', $scope.purchased)
 					.then(function (res) {
 						var data = res.data;

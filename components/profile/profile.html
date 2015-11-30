@@ -8,33 +8,39 @@
 	        		{{ user.customerId }}
 	        	</div>
 	        	<div class="card-heading image">
-		    		<img src="https://community.teamdynamix.com/Images/GenericUser.png" alt="profile picture">
-		    	</div>
-	            <div class="title">
-	                {{ user.name }}
-	            </div>
-	            <div class="desc">{{ user.address }}</div>
+		    			<img src="https://community.teamdynamix.com/Images/GenericUser.png" alt="profile picture">
+		    		</div>
+	          <div class="title">
+	            {{ user.name }}
+	          </div>
+	          <div class="desc">{{ user.address }}</div>
+						<h4> YOUR ORDERS</h4>
+						<div class="invoices">
+							<uib-accordion close-others="oneAtATime">
+								<uib-accordion-group ng-repeat="i in invoices track by $index" ng-click="displayRow(i.invoiceId)" heading="{{i.invoiceId}}   -  ${{ i.amountBillable }}" >
+									<table class="table table-striped" ng-show="showRow == i.invoiceId">
+										<thead>
+											<tr>
+												<th>Item ID</th>
+												<th>Item Name</th>
+												<th>Quantity</th>
+												<th>Price</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="ie in i.invoiceElement track by $index">
+												<th>{{ ie.itemId }}</th>
+												<th>{{ ie.name }}</th>
+												<th>{{ ie.quantityAmt }}</th>
+												<th>{{ ie.price }}</th>
+											</tr>
+										<tbody>
 
-			<div class="invoices">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>Invoice ID</th>
-							<th>Item ID</th>
-							<th>Quantity</th>
-							<th>Total price</th>
-						</tr>
-					</thead>
-					<tbody ng-repeat="i in invoices track by $index">
-						<tr>
-							<th>{{ i.invoiceId }}</th>
-							<th>{{ i.invoiceElement[0].itemId }}</th>
-							<th>{{ i.invoiceElement[0].quantityAmt }}</th>
-							<th>${{ i.amountBillable }}</th>
-						</tr>
-					<tbody>
-				</table>
-	        </div>
-	    </div>
-	</div>
-</div>
+									</table>
+								</uib-accordion-group>
+							<uib-accordion>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>

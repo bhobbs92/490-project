@@ -12,6 +12,16 @@ $customerId = $payload->customerId;
 
 $dbc = new PDO($db, $dbUsername, $dbPassword);
 
+//get the total price of the items from get array
+	$totalPrice = 0;
+		foreach ($request as $item => $prop) {
+		if($prop->amount >1){
+			$totalPrice = $totalPrice + ($prop->amount * $prop->price);
+		}else{
+			$totalPrice = $totalPrice + $prop->price;
+		}
+	}
+
 
 	//prepare query to determine new invoiceID for insert
 $query = $dbc->prepare("SELECT max(invoiceId) FROM Invoice");
@@ -21,18 +31,17 @@ $query = $dbc->prepare("SELECT max(invoiceId) FROM Invoice");
 
 
 				//prepare query for insert into INVOICE table
-			$query2 = $dbc->prepare("INSERT INTO Invoice VALUES (:invoiceId, 22, :customerId)");
+			$query2 = $dbc->prepare("INSERT INTO Invoice VALUES (:invoiceId, :totalPrice, :customerId)");
 			$query2->bindParam(":invoiceId", $nextPK);
 			$query2->bindParam(":customerId", $customerId);
+			$query2->bindParam(":totalPrice", $totalPrice);
 			if ($query2->execute()) {
 
 						//for each product customer purchased
 					foreach ($request as $item => $prop) {
-					//	if($item != 'total'){
 
-
-												//prepare query for insert into INVOICE_ELEMENTS table
-						$query3 = $dbc->prepare("INSERT INTO Invoice_Elements VALUES (NULL,:invoiceId,22,:quantityAmt)");
+							//prepare query for insert into INVOICE_ELEMENTS table
+						$query3 = $dbc->prepare("INSERT INTO Invoice_Elements VALUES (NULL,:invoiceId,:itemId,:quantityAmt)");
 
 						$query3->bindParam(":invoiceId", $nextPK);
 						$query3->bindParam(":itemId", $prop->itemId);
