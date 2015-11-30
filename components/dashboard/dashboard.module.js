@@ -15,7 +15,7 @@
 		}
 
 		$scope.logout = logout;
-		
+
 
 		function logout () {
 			authFactory.removeToken();

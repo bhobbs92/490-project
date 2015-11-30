@@ -1,5 +1,5 @@
 <a class="pull-right logout btn btn-info" ng-click="logout()"><span>Log out</span></a>
-<div class="dashboard">
+<div class="dashboard row">
 	<h1>Dashboard</h1>
 	<div class="metroblock buysblock left" ui-sref="profile">
 	  <span class="icon fontawesome-briefcase left"></span>
@@ -13,4 +13,20 @@
 	  <div class="clear"></div>
 	  <h4>What's for sale</h4>
 	</div>
+</div>
+<div class="dashboard row">
+	<h1>Admin</h1>
+	<div class="metroblock buysblock left" ui-sref="manage-customers">
+		<span class="icon fontawesome-briefcase left"></span>
+		<h2>Manage Customers</h2>
+		<div class="clear"></div>
+		<h4>Update user accounts</h4>
+	</div>
+	<div class="metroblock commentsblock left" ui-sref="manage-inventory">
+		<span class="icon fontawesome-comments left"></span>
+		<h2>Manage Inventory</h2>
+		<div class="clear"></div>
+		<h4>Create/Add stock</h4>
+	</div>
+</div>
 </div>

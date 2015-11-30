@@ -41,7 +41,21 @@
 				url: '/invoice/:items',
 				templateUrl: 'components/invoice/invoice.html',
 				controller: 'invoiceCtrl'
-			});
+			})
+
+			.state('manage-customers', {
+				url: '/manage-customers',
+				templateUrl: 'components/admin/customers/manage-customers.html',
+				controller: 'manageCustomersCtrl'
+			})
+
+			.state('manage-inventory', {
+				url: '/manage-inventory',
+				templateUrl: 'components/admin/inventory/manage-inventory.html',
+				controller: 'manageInventoryCtrl'
+			})
+
+			;
 
 		$urlRouterProvider.otherwise('/');
 	}
