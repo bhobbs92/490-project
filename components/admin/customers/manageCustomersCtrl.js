@@ -6,8 +6,7 @@
 
     manageCustomersCtrl.inject = ['$scope', '$http', '$state', 'authFactory'];
 
-    function manageCustomersCtrl($scope, $http, $state, authFactory){
-        $scope.customers;
+    function manageCustomersCtrl ($scope, $http, $state, authFactory) {
         $scope.formData = {};
 
         $http.get('api/admin/customerSelect.php')
@@ -21,12 +20,20 @@
             if (!validForm) {
                 toastr.error('Please complete the form');
             } else {
-                $http.post('api/signup.php', $scope.formData);
-                $scope.customers.unshift($scope.formData);
-                $scope.customers;
-                $scope.formData = {};
+                $http.post('api/signup.php', $scope.formData)
+                    .then(function (res) {
+                        $scope.customers.push($scope.formData);
+                        $scope.formData = {};
+                    });
             }
-            
         }
+
+        $scope.deleteCustomer = function (index) {
+            $http
+            .post('api/admin/deleteUser.php', $scope.customers[index])
+                .then(function (res) {
+                    console.log(res);
+                });
+        };
     };
 }());
