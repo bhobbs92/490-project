@@ -22,7 +22,7 @@
             } else {
                 $http.post('api/signup.php', $scope.formData)
                     .then(function (res) {
-                        $scope.customers.push($scope.formData);
+                        $scope.customers.push($scope.formData);  //unshift looked cooler:)
                         $scope.formData = {};
                     });
             }
@@ -32,6 +32,7 @@
             $http
             .post('api/admin/deleteUser.php', $scope.customers[index])
                 .then(function (res) {
+                  $scope.customers.splice(index, 1);
                     console.log(res);
                 });
         };
