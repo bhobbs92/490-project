@@ -2,16 +2,16 @@
   margin: 0;
   padding: 0;
 }
- 
+
 nav {
   margin-top: 20px;
 }
- 
+
 ul {
   overflow: auto;
   list-style-type: none;
 }
- 
+
 li {
   height: 25px;
   float: left;
@@ -19,27 +19,27 @@ li {
   border-right: 1px solid #aaa;
   padding: 0 20px;
 }
- 
+
 li:last-child {
   border-right: none;
 }
- 
+
 li a {
   text-decoration: none;
   color: #ccc;
   font: 20px Helvetica, Verdana, sans-serif;
- 
+
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
- 
+
 li a:hover {
   color: #666;
 }
- 
+
 li.active a {
   font-weight: bold;
   color: #333;
@@ -173,14 +173,14 @@ clear: both;
 		width:36%;
 		margin:1.5em 0;
 	}
-	
+
 	.actions .btn-info{
 		float:left;
 	}
 	.actions .btn-danger{
 		float:right;
 	}
-	
+
 	table#cart thead { display: none; }
 	table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
 	table#cart tbody tr td:first-child { background: #333; color: #fff; }
@@ -188,9 +188,9 @@ clear: both;
 		content: attr(data-th); font-weight: bold;
 		display: inline-block; width: 8rem;
 	}
-	
-	
-	
+
+
+
 	table#cart tfoot td{display:block; }
 	table#cart tfoot td .btn{display:block;}
 }
@@ -408,4 +408,11 @@ clear: both;
 .card.hovercard .bottom {
   padding: 0 20px;
   margin-bottom: 17px;
+}
+.edit-data{
+  display: none;
+}
+
+.data-entries th:hover .edit-data{
+  display: inline-block;
 }
