@@ -12,11 +12,17 @@ try {
 
   if ($query->execute()) {
     $res = array('success' => true, 'message' => 'User successfully deleted');
+
+    $rows = $query->fetch();
+
+    if ($rows) {
+      $res[] = $rows;
+    }
   } else {
     $res = array('success' => false, 'message' => 'Could not execute first query');
-
-    echo json_encode($res);
   }
+
+  echo json_encode($res);
 
 } catch (Exception $e) {
   echo 'Error: ' . $e->getMessage();

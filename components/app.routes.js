@@ -57,7 +57,8 @@
 
 			.state('package-control', {
 				url: '/package-control',
-				templateUrl: 'components/admin/package/package-control.html'
+				templateUrl: 'components/admin/package/package-control.html',
+				controller: 'packageControl'
 			});
 
 		$urlRouterProvider.otherwise('/');
