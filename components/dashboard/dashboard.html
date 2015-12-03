@@ -1,21 +1,23 @@
 <a class="pull-right logout btn btn-info" ng-click="logout()">
 	<span>Log out</span>
 </a>
-<div class="dashboard row">
-	<h1>Dashboard</h1>
-	<div class="metroblock buysblock left" ui-sref="profile">
-	  <span class="icon fontawesome-briefcase left"></span>
-	  <h2>Profile</h2>
-	  <div class="clear"></div>
-	  <h4>See your profile</h4>
+
+<div class="col-sm-12">
+	<div class="dashboard row">
+		<h1>Dashboard</h1>
+		<div class="metroblock buysblock left" ui-sref="profile">
+		  <span class="icon fontawesome-briefcase left"></span>
+		  <h2>Profile</h2>
+		  <div class="clear"></div>
+		  <h4>See your profile</h4>
+		</div>
+		<div class="metroblock commentsblock left" ui-sref="inventory">
+		  <span class="icon fontawesome-comments left"></span>
+		  <h2>Inventory</h2>
+		  <div class="clear"></div>
+		  <h4>What's for sale</h4>
+		</div>
 	</div>
-	<div class="metroblock commentsblock left" ui-sref="inventory">
-	  <span class="icon fontawesome-comments left"></span>
-	  <h2>Inventory</h2>
-	  <div class="clear"></div>
-	  <h4>What's for sale</h4>
-	</div>
-</div>
 <div class="dashboard row">
 	<h1>Admin</h1>
 	<div class="metroblock buysblock left" ui-sref="manage-customers">
@@ -32,3 +34,7 @@
 	</div>
 </div>
 </div>
+</div>
+
+
+<img id="gtsLogo" class="left" src="images/GTS.jpeg" alt="GTS Company Logo">

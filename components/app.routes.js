@@ -55,7 +55,10 @@
 				controller: 'manageInventoryCtrl'
 			})
 
-			;
+			.state('package-control', {
+				url: '/package-control',
+				templateUrl: 'components/admin/package/package-control.html'
+			});
 
 		$urlRouterProvider.otherwise('/');
 	}
