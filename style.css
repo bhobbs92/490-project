@@ -415,4 +415,10 @@ clear: both;
 
 .data-entries th:hover .edit-data{
   display: inline-block;
+  cursor: pointer;
+}
+
+.data-entries td:hover .edit-data{
+  display: inline-block;
+  cursor: pointer;
 }

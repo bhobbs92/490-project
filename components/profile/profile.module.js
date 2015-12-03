@@ -16,7 +16,8 @@
 
 		$scope.logout = logout;
 		$scope.showRow = false;
-		
+		$scope.loadingInvoices = true;
+
 		$scope.displayRow = function(invoiceId){
 			$scope.showRow = invoiceId;
 		}
@@ -25,7 +26,7 @@
 			.then(function (res) {
 				$scope.user = res.data.customerData[0];
 				$scope.invoices = res.data.invoices;
-				console.log($scope.invoices);
+				$scope.loadingInvoices = false;
 			});
 
 		function logout () {

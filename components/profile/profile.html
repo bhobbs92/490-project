@@ -16,8 +16,13 @@
 	          <div class="desc">{{ user.address }}</div>
 						<h4> YOUR ORDERS</h4>
 						<div class="invoices">
+							<div ng-show="loadingInvoices">
+								<img src="images/loading.gif" style="height:50px">
+							</div>
+							<div ng-show="invoices.length == 0">no orders to display :(</div>
 							<uib-accordion close-others="oneAtATime">
-								<uib-accordion-group ng-repeat="i in invoices track by $index" ng-click="displayRow(i.invoiceId)" heading="{{i.invoiceId}}   -  ${{ i.amountBillable }}" >
+								<uib-accordion-group ng-repeat="i in invoices track by $index" ng-click="displayRow(i.invoiceId)" >
+									<uib-accordion-heading>{{i.invoiceId}}    <small>${{ i.amountBillable }}</small></uib-accordion-heading>
 									<table class="table table-striped" ng-show="showRow == i.invoiceId">
 										<thead>
 											<tr>

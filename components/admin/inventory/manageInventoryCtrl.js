@@ -17,6 +17,18 @@
     $scope.logout = logout;
     $scope.goToInvoice = goToInvoice;
 
+    $scope.formData = {
+      showAddForm : false
+    };
+
+    $scope.model = {
+        showForm : undefined,
+        rowData : undefined,
+        recordValue : undefined,
+        column: undefined
+    };
+
+
     $http.get('api/inventory.php')
       .then(function (res) {
         var data = res.data;
@@ -101,6 +113,72 @@
       }
     }
 
+    $scope.showEditForm = function (index, element){
+      $scope.model.showForm = ""+index+element;   // unique identifier for displaying form for only that record
+      $scope.model.rowData = $scope.items[index];
+      $scope.model.recordValue = $scope.model.rowData[element];
+
+      //get the name of the key the user is trying to edit
+      for (var key in $scope.model.rowData ){
+        if(isNaN(key)){ //filters object by discarding array elements
+          if($scope.model.rowData[key] == $scope.model.recordValue){
+            $scope.model.column = key;
+          }
+        }
+      }
+    }
+
+    var getuniqueId = function(){
+      var highestId = 0;
+      var currentId;
+      for (var element in $scope.items){
+        currentId = Number($scope.items[element].itemId); //force coercion to number
+        if( highestId <= currentId){
+          highestId = currentId;
+        }
+      }
+      return highestId + 1;
+    }
+
+
+    $scope.addToInventory = function(){
+      console.log($scope.formData);
+      var nextId = getuniqueId();
+      //prepare statement
+      var preparedStatement = "INSERT INTO Inventory VALUES ("+nextId+", '"+$scope.formData.name+"', "+$scope.formData.price+", "+$scope.formData.stock+") ";
+
+      console.log(preparedStatement);
+      $http.post('api/admin/databasePlease.php', preparedStatement).then(
+        function(response){
+          console.log(response);
+          $state.reload();
+        }
+      )
+    }
+
+
+    $scope.updateInventory = function(){
+      //prepare statement
+      var preparedStatement = "UPDATE Inventory SET "+ $scope.model.column +" = '" +$scope.model.recordValue+
+                                "' WHERE itemId = '" +$scope.model.rowData['itemId']+ "'";
+
+      alert(preparedStatement);
+      $http.post('api/admin/databasePlease.php', preparedStatement).then(
+        function(response){
+          console.log(response);
+          $state.reload();
+        }
+      );
+    }
+
+    $scope.deleteInventory = function (index) {
+        $http
+        .post('api/admin/deleteInventory.php', $scope.items[index])
+            .then(function (res) {
+              $state.reload();
+            });
+    };
+
     function goToInvoice () {
       if (!$scope.cart.length) {
         toastr.error('Your cart has no items!');
@@ -113,7 +191,6 @@
         });
 
 
-      //	$scope.purchased.total = getTotalPrice();
         $http.post('api/inventoryUpdate.php', $scope.purchased)
           .then(function (res) {
             var data = res.data;
@@ -123,6 +200,7 @@
               $state.go('invoice', { items: true });
             }
           });
+
       }
     }
   };

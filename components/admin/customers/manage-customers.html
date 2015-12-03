@@ -1,4 +1,7 @@
-<h1>Customers</h1>
+<span style="display:flex;"><h1 id="inventoryTitle">Customers</h1>
+  <a style="margin: 30px 8px" ng-click="model.showAddForm = !model.showAddForm" ng-show="!model.showAddForm">add</a>
+  <a style="margin: 30px 8px" ng-click="model.showAddForm = !model.showAddForm" ng-show="model.showAddForm">nah</a>
+</span>
 <table class="table table-striped">
   <thead>
     <th>Customer Name</th>
@@ -6,15 +9,15 @@
     <th>Address</th>
   </thead>
   <tbody>
-    <tr style="background-color: green;">
-        <th><img src="images/add.png" style="height:17px;"> <input type="text" name="name" ng-model="formData.fullName"></th>
-        <th><img src="images/add.png" style="height:17px;"> <input type="text" name="customerId" ng-model="formData.customerId"></th>
+    <tr ng-show="model.showAddForm" style="background-color: green;">
+        <th><img src="images/add.png" style="height:17px;"> <input type="text" name="name" ng-model="formData.fullName" placeholder="Customer Name"></th>
+        <th><img src="images/add.png" style="height:17px;"> <input type="text" name="customerId" ng-model="formData.customerId" placeholder="Customer Id"></th>
         <th>
           <img src="images/add.png" style="height:17px;">
-          <input type="text" name="address" ng-model="formData.address">
+          <input type="text" name="address" ng-model="formData.address" placeholder="Customer Address">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <img src="images/add.png" style="height:17px;">
-          <input type="password" placeholder="password" ng-model="formData.password">&nbsp;&nbsp;
+          <input type="password" placeholder="password" ng-model="formData.password" placeholder="Customer Password">&nbsp;&nbsp;
           <input type="button" ng-click="addCustomer()" class="btn-sm btn-default" value="Add Customer">
         </th>
     </tr>

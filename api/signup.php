@@ -31,7 +31,7 @@
 				$query2->bindParam(":hash", $password);
 
 				if ($query2->execute()) {
-					$res = array('success' => true, 'message' => 'Thank you siging up. You may now log in');
+					$res = array('success' => true, 'message' => 'Thank you for signing up. You may now log in');
 					echo json_encode($res);
 				} else {
 					$res = array('message' => 'Could not execute second query');

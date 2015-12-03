@@ -7,12 +7,17 @@
     manageCustomersCtrl.inject = ['$scope', '$http', '$state', 'authFactory'];
 
     function manageCustomersCtrl ($scope, $http, $state, authFactory) {
-        $scope.formData = {};
+
+        $scope.formData = {
+
+        };
+
         $scope.model = {
             showForm : undefined,
             rowData : undefined,
             recordValue : undefined,
-            column: undefined
+            column: undefined,
+            showAddForm : false
         };
 
         $http.get('api/admin/customerSelect.php')
@@ -44,13 +49,13 @@
         };
 
         $scope.showEditForm = function (index, element){
-          $scope.model.showForm = ""+index+element;   // display form for that record
+          $scope.model.showForm = ""+index+element;   // unique identifier for displaying form for only that record
           $scope.model.rowData = $scope.customers[index];
           $scope.model.recordValue = $scope.model.rowData[element];
 
           //get the name of the key the user is trying to edit
           for (var key in $scope.model.rowData ){
-            if(isNaN(key)){
+            if(isNaN(key)){ //filters object by discarding array elements
               if($scope.model.rowData[key] == $scope.model.recordValue){
                 $scope.model.column = key;
               }
@@ -61,7 +66,7 @@
         $scope.editCustomer = function(){
           //prepare statement
           var preparedStatement = "UPDATE Customer SET "+ $scope.model.column +" = '" +$scope.model.recordValue+ "' WHERE customerId = '" +$scope.model.rowData['customerId']+ "'"
-          $http.post('api/admin/updateCustomer.php', preparedStatement).then(
+          $http.post('api/admin/databasePlease.php', preparedStatement).then(
             function(response){
               console.log(response);
               $state.reload();

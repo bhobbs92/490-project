@@ -43,6 +43,9 @@ if ($query2->execute()) {
       $invoiceCounter = 0;
       foreach($invoiceElements as $key => $value){
         $currentItemId = $invoiceElements[$invoiceCounter]["itemId"];
+        if(!empty($currentItemId )){
+
+
 
         $query4 = $dbc->prepare("SELECT name, price FROM Inventory WHERE itemId = :currentItemId");
         $query4->bindParam(":currentItemId", $currentItemId);
@@ -50,16 +53,33 @@ if ($query2->execute()) {
           $ItemElements = $query4->fetchAll();
         }
 
+        if(count($ItemElements) > 0){
+
+          $tempItemArray[$invoiceCounter] = array(
+            'invoiceId' => $invoiceElements[$invoiceCounter]["invoiceId"],
+            'invoiceELementId' => $invoiceElements[$invoiceCounter]["invoiceELementId"],
+            'itemId'=> $invoiceElements[$invoiceCounter]["itemId"],
+            'name' => $ItemElements[0][0],
+            'price' => $ItemElements[0][1],
+            'quantityAmt' => $invoiceElements[$invoiceCounter]["quantityAmt"],
+          );
+
+        }
+        else{
+          $tempItemArray = "none";
+        }
+      }else{
         $tempItemArray[$invoiceCounter] = array(
           'invoiceId' => $invoiceElements[$invoiceCounter]["invoiceId"],
           'invoiceELementId' => $invoiceElements[$invoiceCounter]["invoiceELementId"],
-          'itemId'=> $invoiceElements[$invoiceCounter]["itemId"],
-          'name' => $ItemElements[0][0],
-          'price' => $ItemElements[0][1],
+          'itemId'=> "(deleted)",
+          'name' => "(deleted)",
+          'price' => "(deleted)",
           'quantityAmt' => $invoiceElements[$invoiceCounter]["quantityAmt"],
         );
-
+      }
         $invoiceCounter++;
+
       }
 
       $tempInvoiceArray = array(

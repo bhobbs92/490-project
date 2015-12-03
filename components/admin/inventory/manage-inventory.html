@@ -1,12 +1,24 @@
 <a class="pull-right logout btn btn-info" ng-click="logout()"><span>Log out</span></a>
-<h1 id="inventoryTitle">Inventory</h1>
+<span style="display:flex;"><h1 id="inventoryTitle">Inventory</h1>
+  <a style="margin: 30px 8px" ng-click="formData.showAddForm = !formData.showAddForm" ng-show="!formData.showAddForm">add</a>
+  <a style="margin: 30px 8px" ng-click="formData.showAddForm = !formData.showAddForm" ng-show="formData.showAddForm">nah</a>
+</span>
 
-<button type="button" class="btn btn-success pull-right cart" data-toggle="modal" data-target="#cartModal">
-  See cart
-</button>
 
 <table class="table table-striped">
     <thead>
+      <tr ng-show="formData.showAddForm" style="background-color: green;">
+          <th><img src="images/add.png" style="height:17px;"> <input type="text" name="item name" placeholder="item name" ng-model="formData.name"></th>
+          <th>
+            <img src="images/add.png" style="height:17px;">
+            <input type="text" name="address" ng-model="formData.price" placeholder="item price">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img src="images/add.png" style="height:17px;">
+            <input type="password" placeholder="item stock" ng-model="formData.stock">&nbsp;&nbsp;
+            <input type="button" ng-click="addToInventory()" class="btn-sm btn-default" value="Add Inventory">
+          </th>
+
+      </tr>
       <tr>
         <th>ID #</th>
         <th>Item</th>
@@ -15,26 +27,41 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="item in items track by $index">
-        <td>{{ item.itemId }}</td>
-        <td>{{ item.name }}
-			<span ng-show="item.name === 'cat-in-the-hat (brail)'">
-				<img src="components/inventory/cat.png" style="height:25px;">
-			</span>
-		</td>
-        <td>${{ item.price }}</td>
+      <tr class="data-entries" ng-repeat="item in items track by $index">
+        <td>
+            <span ng-hide="model.showForm == ''+ $index + 0">{{ item.itemId }}</span>
+            <span ng-hide="model.showForm == ''+ $index + 0" class="edit-data" ng-click="showEditForm($index, 0)"><img src="images/pencil.png" style="height:8px;"></span>
+            <span ng-show="model.showForm == ''+ $index + 0"><input type="text" ng-model="model.recordValue"> <img src="images/add.png" style="height:17px;" ng-click="updateInventory()"></span>
+        </td>
+        <td>
+          <span ng-hide="model.showForm == ''+ $index + 1">{{ item.name }}</span>
+          <span ng-hide="model.showForm == ''+ $index + 1" class="edit-data" ng-click="showEditForm($index, 1)"><img src="images/pencil.png" style="height:8px;"></span>
+			    <span ng-show="item.name === 'cat-in-the-hat (brail)'"><img src="components/inventory/cat.png" style="height:25px;"></span>
+          <span ng-show="model.showForm == ''+ $index + 1"><input type="text" ng-model="model.recordValue"> <img src="images/add.png" style="height:17px;" ng-click="updateInventory()"></span>
+		    </td>
+        <td>
+          <span ng-hide="model.showForm == ''+ $index + 3">${{ item.price }}</span>
+          <span ng-hide="model.showForm == ''+ $index + 3" class="edit-data" ng-click="showEditForm($index, 3)"><img src="images/pencil.png" style="height:8px;"></span>
+          <span ng-show="model.showForm == ''+ $index + 3"><input type="text" ng-model="model.recordValue"> <img src="images/add.png" style="height:17px;" ng-click="updateInventory()"></span>
+        </td>
         <td>
           <span class="inStock {{ getStock($index) }}">
             <span ng-show="item.stock > 0">
               <span ng-show="getStock($index) === 'almostGone'">
                 Only
               </span>
-              {{ item.stock }} left
+              <span ng-hide="model.showForm == ''+ $index + 2">{{ item.stock }} left</span>
+              <span ng-show="model.showForm == ''+ $index + 2"><input type="text" ng-model="model.recordValue"> <img src="images/add.png" style="height:17px;" ng-click="updateInventory()"></span>
             </span>
-            <span class="text-danger" ng-show="item.stock <= 0">Sold out</span>
+            <span class="text-danger" ng-show="item.stock <= 0 && model.showForm != ''+ $index + 2">Sold out</span>
+            <span ng-show="item.stock <= 0 && model.showForm == ''+ $index + 2"><input type="text" ng-model="model.recordValue"> <img src="images/add.png" style="height:17px;" ng-click="updateInventory()"></span>
           </span>
-          <button id="addToCart" class="btn btn-info" ng-click="addToCart($index)">+</button>
-        </td>
+            <span ng-hide="model.showForm == ''+ $index + 2" class="edit-data" ng-click="showEditForm($index, 2)"><img src="images/pencil.png" style="height:8px;"></span>
+          </span>
+        <td>
+          <td>
+              <button id="addToCart" class="btn btn-danger" ng-click="deleteInventory($index)">X</button>
+          </td>
       </tr>
     </tbody>
 </table>
