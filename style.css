@@ -91,6 +91,10 @@ div.no-items.jumbotron {
 	padding: 30px;
 }
 
+.addOrNah {
+  cursor: pointer;
+}
+
 div.no-items.jumbotron a {
 	margin-top: 15px;
 }

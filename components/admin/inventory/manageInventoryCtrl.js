@@ -8,14 +8,11 @@
 
   function manageInventoryCtrl($scope, $http, $state, authFactory){
     $scope.cart = [];
-    $scope.purchased = {};
 
-    $scope.addToCart = addToCart;
     $scope.getStock = getStock;
     $scope.getTotalPrice = getTotalPrice;
     $scope.removeItemFromCart = removeItemFromCart;
     $scope.logout = logout;
-    $scope.goToInvoice = goToInvoice;
 
     $scope.formData = {
       showAddForm : false
@@ -37,27 +34,6 @@
           $scope.items = data.items;
         }
       });
-
-    function addToCart (itemIndex) {
-      var currentItem = $scope.items[itemIndex];
-
-      if (currentItem.stock > 0) {
-
-        if ($scope.purchased[currentItem.name]) {
-          console.log('Incrementing ' + currentItem.name + ' \'s amount');
-          $scope.purchased[currentItem.name].amount++
-        } else {
-          console.log('Need to create ' + currentItem.name);
-          $scope.purchased[currentItem.name] = currentItem;
-          $scope.purchased[currentItem.name].amount = 1;
-        }
-
-        console.log($scope.purchased);
-
-        currentItem.stock--;
-        $scope.cart.push(currentItem);
-      }
-    }
 
     function getStock (itemIndex) {
       var currentItem = $scope.items[itemIndex];
@@ -86,7 +62,7 @@
       if ($scope.purchased[itemToDelete.name].amount === 1) {
         delete $scope.purchased[itemToDelete.name];
       } else {
-        $scope.purchased[itemToDelete.name].amount --;
+        $scope.purchased[itemToDelete.name].amount--;
       }
 
       console.log($scope.purchased[itemToDelete.name]);
@@ -162,7 +138,6 @@
       var preparedStatement = "UPDATE Inventory SET "+ $scope.model.column +" = '" +$scope.model.recordValue+
                                 "' WHERE itemId = '" +$scope.model.rowData['itemId']+ "'";
 
-      alert(preparedStatement);
       $http.post('api/admin/databasePlease.php', preparedStatement).then(
         function(response){
           console.log(response);
@@ -178,30 +153,5 @@
               $state.reload();
             });
     };
-
-    function goToInvoice () {
-      if (!$scope.cart.length) {
-        toastr.error('Your cart has no items!');
-      } else {
-
-        $http.post('api/invoice.php', $scope.purchased).then(function(response){
-          var data = response.data;
-          console.log('response from invoice insertion: ');
-          console.log(data);
-        });
-
-
-        $http.post('api/inventoryUpdate.php', $scope.purchased)
-          .then(function (res) {
-            var data = res.data;
-            console.log(res);
-
-            if (data.success) {
-              $state.go('invoice', { items: true });
-            }
-          });
-
-      }
-    }
   };
 }());

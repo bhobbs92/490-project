@@ -63,7 +63,7 @@
           }
         }
 
-        $scope.editCustomer = function(){
+        $scope.editCustomer = function () {
           //prepare statement
           var preparedStatement = "UPDATE Customer SET "+ $scope.model.column +" = '" +$scope.model.recordValue+ "' WHERE customerId = '" +$scope.model.rowData['customerId']+ "'"
           $http.post('api/admin/databasePlease.php', preparedStatement).then(
