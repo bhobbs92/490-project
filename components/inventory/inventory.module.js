@@ -15,6 +15,7 @@
 		$scope.removeItemFromCart = removeItemFromCart;
 		$scope.logout = logout;
 		$scope.goToInvoice = goToInvoice;
+		$scope.invoiceId;
 
 		$http.get('api/inventory.php')
 			.then(function (res) {
@@ -100,29 +101,52 @@
 			}
 		}
 
+		var getuniqueId = function(){
+			var highestId = 0;
+			var currentId;
+			for (var element in $scope.items){
+				currentId = Number($scope.items[element].itemId); //force coercion to number
+				if( highestId <= currentId){
+					highestId = currentId;
+				}
+			}
+			return highestId + 1;
+		}
+
 		function goToInvoice () {
-			if (!$scope.cart.length) {
-				toastr.error('Your cart has no items!');
-			} else {
+					if (!$scope.cart.length) {
+						toastr.error('Your cart has no items!');
+					} else {
 
-				$http.post('api/invoice.php', $scope.purchased).then(function(response){
-					var data = response.data;
-					console.log('response from invoice insertion: ');
-					console.log(data);
-				});
+						$http.post('api/invoice.php', $scope.purchased).then(function(response){
+							var data = response.data;
+							console.log('response from invoice insertion: ');
+							$scope.invoiceId = parseInt(data.items[0])+1;
+							console.log($scope.invoiceId);
+							updateTables();
+						});
 
+					}
+				}
 
-			//	$scope.purchased.total = getTotalPrice();
+				function updateTables(){		//update inventory & insert into package
+
 				$http.post('api/inventoryUpdate.php', $scope.purchased)
 					.then(function (res) {
 						var data = res.data;
 						console.log(res);
-
 						if (data.success) {
+							var packageInsertion = "INSERT INTO `Package`(`invoiceId`, `address`, `recipient`, `perishable`, `weight`) VALUES ('"+$scope.invoiceId+"', (SELECT address FROM Customer WHERE CustomerId = (SELECT CustomerId FROM `Invoice` WHERE InvoiceId ='"+$scope.invoiceId+"')), (SELECT name FROM Customer WHERE CustomerId = (SELECT CustomerId FROM `Invoice` WHERE InvoiceId ='"+$scope.invoiceId+"')), 1, 20)";
+							console.log(packageInsertion);
+							$http.post('api/admin/databasePlease.php', packageInsertion).then(
+								function(response){
+									console.log(response.data);
+									var invoices = response.data;
+								}
+							)
 							$state.go('invoice', { items: true });
 						}
 					});
-			}
-		}
+				}
 	}
 }());
