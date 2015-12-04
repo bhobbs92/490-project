@@ -14,7 +14,6 @@
         <th>Invoice ID #</th>
         <th>Address</th>
         <th>Recipient</th>
-        <th>Perishable</th>
         <th>Weight (kg)</th>
       </tr>
     </thead>
@@ -24,7 +23,6 @@
         <td>{{ p.invoiceId }}</td>
         <td>{{ p.address }}</td>
         <td>{{ p.recipient }}</td>
-        <td>{{ p.perishable | perishableFilter }}</td>
         <td>{{ p.weight }}</td>
         <td>
           <img ng-show="p.onTheTruck" id="onTheTruck" src="images/onTheTruck.ico" alt="truck logo">
@@ -41,7 +39,7 @@
           <td id="cartItem" data-th="Product">
             <div class="row">
               <div>
-                <h4>{{ ts.packageId }} to {{ ts.recipient }}</h4>
+                <h4>Id - {{ ts.packageId }} Address - {{ ts.address }}</h4>
               </div>
             </div>
           </td>
@@ -50,9 +48,10 @@
       <tfoot>
         <tr>
           <td><a class="btn btn-warning" data-dismiss="modal"><i class="fa fa-angle-left"></i> Go back</a></td>
-          <td colspan="2" class="hidden-xs"></td>
+          <td colspan="2"><input type="checkbox" ng-model="perishable"> Perishable</td>
+          <td colspan="1" class="hidden-xs"></td>
           <td>
-            <a ng-click="goToInvoice()" class="btn btn-success btn-block">Ship items 
+            <a ng-click="addCargo()" class="btn btn-success btn-block">Ship items
               <i class="fa fa-angle-right"></i>
             </a>
           </td>
