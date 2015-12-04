@@ -12,7 +12,7 @@
 
 		$scope.addToCart = addToCart;
 
-		var preparedStatement = "SELECT * FROM Package";
+		var preparedStatement = "SELECT * FROM Package WHERE deleteflag = 0";
 
 		$http.post('api/admin/databasePlease.php', preparedStatement)
 			.then(function (res) {
@@ -72,10 +72,18 @@
 												var insertCargoEle = "INSERT INTO `Cargo_Elements`(`Skid_ID_Number`, `packageId`, `name`, `address`, `weight`)"
 																							+ "VALUES ("+$scope.nextCargoId+","+ $scope.toShip[package].packageId+",'"+ $scope.toShip[package].recipient+"','"+ $scope.toShip[package].address+"',"+ $scope.toShip[package].weight+")";
 												console.log(insertCargoEle);
-												$http.post('api/admin/databasePlease.php', insertCargo).then(
+												$http.post('api/admin/databasePlease.php', insertCargoEle).then(
 													function (res) {
 														console.log(res);
 													});
+
+													var setDeleteFlag = "UPDATE `Package` SET `deleteFlag`= 1 WHERE packageId =" +$scope.toShip[package].packageId;
+
+													$http.post('api/admin/databasePlease.php', setDeleteFlag).then(
+														function (res) {
+															console.log(res);
+															location.reload();
+														});
 
 											}
 

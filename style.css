@@ -115,6 +115,10 @@ div.no-items.jumbotron a {
   width: 200px;
 }
 
+#gtsLogo:hover{
+  opacity: .5;
+}
+
 @import url(http://weloveiconfonts.com/api/?family=fontawesome);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
 
