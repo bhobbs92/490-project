@@ -1,7 +1,10 @@
-<a class="pull-right logout btn btn-info" ng-click="logout()"><span>Log out</span></a>
 <span style="display:flex;">
   <h1 id="inventoryTitle">Packages</h1>
 </span>
+
+<button type="button" class="btn btn-success pull-right cart" data-toggle="modal" data-target="#cartModal">
+  See truck
+</button>
 
 
 <table class="table table-striped">
@@ -23,8 +26,9 @@
         <td>{{ p.recipient }}</td>
         <td>{{ p.perishable | perishableFilter }}</td>
         <td>{{ p.weight }}</td>
-        <td >
+        <td>
           <img ng-show="p.onTheTruck" id="onTheTruck" src="images/onTheTruck.ico" alt="truck logo">
+        </td>
       </tr>
     </tbody>
 </table>
@@ -33,29 +37,22 @@
   <div class="cart-container">
     <table id="cart" class="table table-hover table-condensed">
       <tbody id="cartItems">
-        <tr ng-repeat="c in cart track by $index">
+        <tr ng-repeat="ts in toShip track by $index">
           <td id="cartItem" data-th="Product">
             <div class="row">
-              <div class="col-sm-10">
-                <h4 class="nomargin">{{ c.name }}</h4>
+              <div>
+                <h4>{{ ts.packageId }} to {{ ts.recipient }}</h4>
               </div>
             </div>
-          </td>
-          <td data-th="Price">${{ c.price }}</td>
-          <td class="actions" data-th="">
-            <button class="btn btn-danger btn-sm" ng-click="removeItemFromCart(c, $index)">
-              <i class="fa fa-trash-o"></i>
-            </button>
           </td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
-          <td><a class="btn btn-warning" data-dismiss="modal"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+          <td><a class="btn btn-warning" data-dismiss="modal"><i class="fa fa-angle-left"></i> Go back</a></td>
           <td colspan="2" class="hidden-xs"></td>
-          <td class="hidden-xs text-center"><strong>Total: ${{ getTotalPrice() }}</strong></td>
           <td>
-            <a ng-click="goToInvoice()" class="btn btn-success btn-block">Checkout
+            <a ng-click="goToInvoice()" class="btn btn-success btn-block">Ship items 
               <i class="fa fa-angle-right"></i>
             </a>
           </td>

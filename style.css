@@ -140,6 +140,10 @@ clear: both;
 	margin-left: 15px;
 }
 
+.dashboard.row {
+  border: solid 1px black;
+}
+
 .metroblock {
   width: 21em;
   padding: 0em 1em 1em 1em;
