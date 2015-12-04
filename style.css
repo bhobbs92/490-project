@@ -427,6 +427,15 @@ clear: both;
   cursor: pointer;
 }
 
+.data-entries:hover {
+  cursor: pointer;
+  opacity: .5;
+}
+
+#onTheTruck {
+  width: 25px;
+}
+
 .data-entries td:hover .edit-data{
   display: inline-block;
   cursor: pointer;

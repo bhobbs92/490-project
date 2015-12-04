@@ -16,13 +16,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="data-entries" ng-repeat="p in packages track by $index">
+      <tr class="data-entries" ng-repeat="p in packages track by $index" ng-click="addToCart($index)">
         <td>{{ p.packageId }}</td>
         <td>{{ p.invoiceId }}</td>
         <td>{{ p.address }}</td>
         <td>{{ p.recipient }}</td>
-        <td>{{ p.perishable }}</td>
+        <td>{{ p.perishable | perishableFilter }}</td>
         <td>{{ p.weight }}</td>
+        <td >
+          <img ng-show="p.onTheTruck" id="onTheTruck" src="images/onTheTruck.ico" alt="truck logo">
       </tr>
     </tbody>
 </table>

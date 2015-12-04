@@ -136,7 +136,9 @@
 						var data = res.data;
 						console.log(res);
 						if (data.success) {
-							var packageInsertion = "INSERT INTO `Package`(`invoiceId`, `address`, `recipient`, `perishable`, `weight`) VALUES ('"+$scope.invoiceId+"', (SELECT address FROM Customer WHERE CustomerId = (SELECT CustomerId FROM `Invoice` WHERE InvoiceId ='"+$scope.invoiceId+"')), (SELECT name FROM Customer WHERE CustomerId = (SELECT CustomerId FROM `Invoice` WHERE InvoiceId ='"+$scope.invoiceId+"')), 1, 20)";
+							var obfuscated = (Math.random() * 20);
+
+							var packageInsertion = "INSERT INTO `Package`(`invoiceId`, `address`, `recipient`, `perishable`, `weight`) VALUES ('"+$scope.invoiceId+"', (SELECT address FROM Customer WHERE CustomerId = (SELECT CustomerId FROM `Invoice` WHERE InvoiceId ='"+$scope.invoiceId+"')), (SELECT name FROM Customer WHERE CustomerId = (SELECT CustomerId FROM `Invoice` WHERE InvoiceId ='"+$scope.invoiceId+"')), 1, " + obfuscated + ")";
 							console.log(packageInsertion);
 							$http.post('api/admin/databasePlease.php', packageInsertion).then(
 								function(response){

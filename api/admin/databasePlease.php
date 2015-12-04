@@ -13,7 +13,7 @@ try {
   if ($query->execute()) {
     $res = array('success' => true, 'message' => 'User successfully deleted');
 
-    $rows = $query->fetch();
+    $rows = $query->fetchAll();
 
     if ($rows) {
       $res[] = $rows;
